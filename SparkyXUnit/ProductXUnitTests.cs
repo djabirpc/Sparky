@@ -1,27 +1,26 @@
 ﻿using Moq;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace Sparky
 {
-    [TestFixture]
-    public class ProductNUnitTests
+    public class ProductXUnitTests
     {
-        [Test]
+        [Fact]
         public void GetProductPrice_PlantinumCustomer_ReturnPriceWith20Discount()
         {
             Product product = new Product() { Price = 50 };
 
             var result = product.GetPrice(new Customer() { IsPlatinum = true });
 
-            Assert.That(result, Is.EqualTo(40));
+            Assert.Equal(40,result);
         }
 
-        [Test]
+        [Fact]
         public void GetProductPriceMOQAbuse_PlantinumCustomer_ReturnPriceWith20Discount()
         {
             var customer = new Mock<ICustomer>();
@@ -31,7 +30,7 @@ namespace Sparky
 
             var result = product.GetPrice(customer.Object);
 
-            Assert.That(result, Is.EqualTo(40));
+            Assert.Equal(40, result);
         }
     }
 }
